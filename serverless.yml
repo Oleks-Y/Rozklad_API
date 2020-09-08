@@ -1,0 +1,74 @@
+service: rozklad-api
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    useChildProcesses : true
+  allowedHeaders:
+    - Accept
+    - Content-Type
+    - Content-Length
+    - Authorization
+    - X-Amz-Date
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+
+package:
+  excludeDevDependencies: false
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-north-1
+  memorySize: 128
+  timeout: 5
+  endpointType: regional
+
+functions:
+  add-lesson:
+    handler: app/handler.add_lesson
+    description: POST /lesson
+    events :
+      - http:
+          path: lesson
+          method: post
+          cors:
+            origin : '*'
+            headers: ${self:custom.allowedHeaders}
+
+  get-lesson:
+    handler: app/handler.get_lesson
+    description: GET /lesson
+    events :
+      - http:
+          path : lesson/{id}
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  update:
+    handler: app/handler.update_lesson
+    description: PUT /lesson/{id}
+    events :
+      - http:
+          path: lesson/{id}
+          method: put
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  getAll:
+    handler: app/handler.getAll
+    description: GET /lesson
+    events:
+      - http:
+          path: lesson
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
