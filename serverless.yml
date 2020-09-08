@@ -52,7 +52,7 @@ functions:
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
-  update:
+  update-lesson:
     handler: app/handler.update_lesson
     description: PUT /lesson/{id}
     events :
@@ -62,13 +62,63 @@ functions:
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
-  getAll:
+  getAll-lesson:
     handler: app/handler.getAll
     description: GET /lesson
     events:
       - http:
           path: lesson
           method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  add-student :
+    handler: app/handler.create_student
+    description:  POST /student
+    events:
+      - http:
+          path: student
+          method: post
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  get-student:
+    handler : app/handler.get_student
+    description: GET /student/{id}
+    events:
+      - http:
+          path: student/{id}
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  getAll-student:
+    handler: app/handler.getAll_students
+    description: GET /student
+    events:
+      - http:
+          path: student
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  update-student:
+    handler: app/handler.update_student
+    description: PUT /student/{id}
+    events:
+      - http:
+          path : student/{id}
+          method: put
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  remove-student:
+    handler: app/handler.remove_student
+    description: DELETE /student/{id}
+    events:
+      - http:
+          path : student/{id}
+          method: delete
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
