@@ -1,5 +1,5 @@
 import {APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda";
-import {ILesson, LessonObj} from "./Lesson";
+import {ISubject, LessonObj} from "./Subject";
 
 
 // Default body parameter is object, like dictionary

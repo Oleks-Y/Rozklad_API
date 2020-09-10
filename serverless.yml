@@ -72,6 +72,16 @@ functions:
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
+  remove-lesson:
+    handler: app/handler.removeLesson
+    description: DELETE /lesson
+    events:
+      - http:
+          path : /lesson/{id}
+          method : delete
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
   add-student :
     handler: app/handler.create_student
     description:  POST /student
@@ -98,6 +108,16 @@ functions:
     events:
       - http:
           path: student
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  get-student_by_lastname:
+    handler: app/handler.get_student_by_name
+    description: GET /student/by_name/{name}
+    events:
+      - http:
+          path: student/by_name/{name}
           method: get
           cors:
             origin: '*'

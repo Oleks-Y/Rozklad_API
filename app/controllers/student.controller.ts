@@ -2,13 +2,15 @@ import {Controller} from "./controller";
 import {APIGatewayProxyEvent} from "aws-lambda";
 import {Response} from "../models/HTTPModels";
 import Student, {IStudent} from "../models/Student";
-import Lesson from "../models/Lesson";
+import Lesson from "../models/Subject";
+import {Error} from "mongoose";
+import {CastError} from 'mongoose';
+
 
 export class StudentController extends Controller {
     constructor() {
         super()
     }
-
     async create(event: APIGatewayProxyEvent): Response {
         try {
             let item = JSON.parse(event.body!).Item;
@@ -24,14 +26,15 @@ export class StudentController extends Controller {
         try {
             let item: IStudent | null = await Student.findOne({_id: event.pathParameters!.id})
             let populatedItem = await item?.populate([{path: "lessons", model: Lesson}]).execPopulate()
-
             if (item == null) {
                 return this.notFound()
             }
+            let requiredLessons = await Lesson.find({isRequired: true})
+            item?.lessons.push(...requiredLessons )
             return this.okResponse(populatedItem)
-        } catch (err) {
-            console.log("Error", err)
-            return this.errorResponse(err)
+        }  catch (err){
+                console.log("Error", err)
+                return this.errorResponse(err)
         }
 
     }
@@ -40,10 +43,11 @@ export class StudentController extends Controller {
         try {
             let item = Student.find()
             let populatedItem = await item.populate([{path: "lessons", model: Lesson}]).exec()
-
             if (item == null) {
                 return this.notFound()
             }
+            let requiredLessons = await Lesson.find({isRequired: true})
+            populatedItem.map((student)=> student.lessons.push(...requiredLessons ))
             return this.okResponse(populatedItem)
         } catch (err) {
             console.log("Error", err)
@@ -63,9 +67,10 @@ export class StudentController extends Controller {
                 return this.notFound()
             }
             return this.okResponse(updated)
-        } catch (err) {
-            console.log("Error", err)
-            return this.errorResponse(err)
+        }  catch (err){
+                console.log("Error", err)
+                return this.errorResponse(err)
+
         }
     }
 
@@ -73,7 +78,26 @@ export class StudentController extends Controller {
         try {
             let item = await Student.findByIdAndDelete(event.pathParameters!.id)
             return this.okResponse({})
-        } catch (err) {
+        }  catch (err){
+            // @ts-ignore
+                console.log("Error", err)
+                return this.errorResponse(err)
+
+        }
+    }
+
+    // Method for preview
+    async getByLastName(event: APIGatewayProxyEvent): Response{
+        try{
+            let item: IStudent | null = await Student.findOne({lastName: event.pathParameters!.name})
+            let populatedItem = await item?.populate([{path: "lessons", model: Lesson}]).execPopulate()
+            if (item == null) {
+                return this.notFound()
+            }
+            let requiredLessons = await Lesson.find({isRequired: true})
+            item?.lessons.push(...requiredLessons )
+            return this.okResponse(populatedItem)
+        }catch(err){
             console.log("Error", err)
             return this.errorResponse(err)
         }

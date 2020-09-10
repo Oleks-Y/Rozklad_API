@@ -14,29 +14,25 @@
 import {Document, Schema} from "mongoose";
 import * as mongoose from "mongoose";
 
-export interface ILesson extends Document {
+export interface ISubject extends Document {
     // lesson_id : ;
     name: string;
     teachers: string[];
     lessonsZoom: any[];
     labsZoom: any[];
-    dayOfWeek: number;
-    numberOfLesson: number;
-    week: number;
+    isRequired: boolean;
 }
-export interface LessonObj{
+export interface SubjectObject{
     name: string;
     teachers: string[];
     lessonsZoom: any[];
     labsZoom: any[];
-    dayOfWeek: number;
-    numberOfLesson: number;
-    week: number;
+    isRequired: boolean;
 }
 
-const LessonSchema: Schema = new Schema({
+const SubjectSchema: Schema = new Schema({
     name: {type: String, required: true},
-    teachers: [{type: String}],
+    teachers: {type: String},
     lessonsZoom: [{
         url : {type: String},
         accessCode : {type: String}
@@ -45,9 +41,7 @@ const LessonSchema: Schema = new Schema({
         url : {type: String},
         accessCode : {type: String}
     }],
-    dayOfWeek : {type : Number},
-    numberOfLesson: {type : Number},
-    week : {type : Number},
+    isRequired : {type: Boolean}
 })
-
-export default mongoose.model<ILesson>("Lesson", LessonSchema)
+// Todo іншу колекцію з парами, де буде посилання на дисципліну
+export default mongoose.model<ISubject>("Lesson", SubjectSchema)

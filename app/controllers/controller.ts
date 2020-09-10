@@ -5,7 +5,7 @@ import {getResponseHeaders} from "../utils/utils";
 export class Controller {
     constructor() {
         mongoose.connect(MONGODB)
-            .then(()=> console.log("MongoDB connected succesfullt"))
+            .then(()=> console.log("MongoDB connected succesfully"))
             .catch(error=> console.log(error))
     }
 
@@ -35,4 +35,5 @@ export class Controller {
             body:""
         };
     }
+
 }
