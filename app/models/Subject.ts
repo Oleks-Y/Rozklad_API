@@ -44,4 +44,4 @@ const SubjectSchema: Schema = new Schema({
     isRequired : {type: Boolean}
 })
 // Todo іншу колекцію з парами, де буде посилання на дисципліну
-export default mongoose.model<ISubject>("Lesson", SubjectSchema)
+export default mongoose.model<ISubject>("Subject", SubjectSchema)

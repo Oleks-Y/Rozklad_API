@@ -4,17 +4,17 @@ import {SubjectController} from "./controllers/subject.controller";
 import {Context} from "aws-lambda";
 import {StudentController} from "./controllers/student.controller";
 
-// Lessons
+// subjects
 
-export const add_lesson = async (event: any, context: Context) => new SubjectController().create(event)
+export const add_subject = async (event: any, context: Context) => new SubjectController().create(event)
 
-export const get_lesson =  async (event: any, context: Context) => new SubjectController().get(event)
+export const get_subject =  async (event: any, context: Context) => new SubjectController().get(event)
 
-export const update_lesson = async(event : any, context: Context) => new SubjectController().update(event)
+export const update_subject = async(event : any, context: Context) => new SubjectController().update(event)
 
-export const getAll = async (event: any, context: Context) => new SubjectController().getAll(event)
+export const get_all = async (event: any, context: Context) => new SubjectController().getAll(event)
 
-export const removeLesson = async (event: any, context: Context) => new SubjectController().remove(event)
+export const remove_subject = async (event: any, context: Context) => new SubjectController().remove(event)
 
 // Students
 

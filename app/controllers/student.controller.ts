@@ -2,7 +2,7 @@ import {Controller} from "./controller";
 import {APIGatewayProxyEvent} from "aws-lambda";
 import {Response} from "../models/HTTPModels";
 import Student, {IStudent} from "../models/Student";
-import Lesson from "../models/Subject";
+import Subject from "../models/Subject";
 import {Error} from "mongoose";
 import {CastError} from 'mongoose';
 
@@ -25,13 +25,13 @@ export class StudentController extends Controller {
     async get(event: APIGatewayProxyEvent): Response {
         try {
             let item: IStudent | null = await Student.findOne({_id: event.pathParameters!.id})
-            let populatedItem = await item?.populate([{path: "lessons", model: Lesson}]).execPopulate()
+            await item?.populate([{path: "lessons", model: Subject}]).execPopulate()
             if (item == null) {
                 return this.notFound()
             }
-            let requiredLessons = await Lesson.find({isRequired: true})
+            let requiredLessons = await Subject.find({isRequired: true})
             item?.lessons.push(...requiredLessons )
-            return this.okResponse(populatedItem)
+            return this.okResponse(item)
         }  catch (err){
                 console.log("Error", err)
                 return this.errorResponse(err)
@@ -42,13 +42,13 @@ export class StudentController extends Controller {
     async getAll(event: APIGatewayProxyEvent): Response {
         try {
             let item = Student.find()
-            let populatedItem = await item.populate([{path: "lessons", model: Lesson}]).exec()
+            let populatedItem = await item.populate([{path: "lessons", model: Subject}]).exec()
             if (item == null) {
                 return this.notFound()
             }
-            let requiredLessons = await Lesson.find({isRequired: true})
-            populatedItem.map((student)=> student.lessons.push(...requiredLessons ))
-            return this.okResponse(populatedItem)
+            let requiredSubjects = await Subject.find({isRequired: true})
+            populatedItem.map((student)=> student.lessons.push(...requiredSubjects ))
+            return this.okResponse(item)
         } catch (err) {
             console.log("Error", err)
             return this.errorResponse(err)
@@ -87,16 +87,21 @@ export class StudentController extends Controller {
     }
 
     // Method for preview
+    // And this shit not working
     async getByLastName(event: APIGatewayProxyEvent): Response{
         try{
-            let item: IStudent | null = await Student.findOne({lastName: event.pathParameters!.name})
-            let populatedItem = await item?.populate([{path: "lessons", model: Lesson}]).execPopulate()
-            if (item == null) {
+            let requestedName = event.pathParameters!.name
+            console.log(requestedName)
+            let item: IStudent[] | null = await Student.find({lastName: requestedName})
+            console.log("Item: ", item)
+            if (item === null) {
                 return this.notFound()
             }
-            let requiredLessons = await Lesson.find({isRequired: true})
-            item?.lessons.push(...requiredLessons )
-            return this.okResponse(populatedItem)
+            item.map( async item=> await item?.populate([{path: "lessons", model: Subject}]).execPopulate())
+            let requiredLessons = await Subject.find({isRequired: true})
+            item.map( item=>item?.lessons.push(...requiredLessons ) )
+
+            return this.okResponse(item)
         }catch(err){
             console.log("Error", err)
             return this.errorResponse(err)

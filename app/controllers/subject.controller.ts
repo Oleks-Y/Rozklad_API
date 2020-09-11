@@ -1,4 +1,3 @@
-import Lesson from "../models/Subject";
 import Subject, {ISubject, SubjectObject} from "../models/Subject";
 import {Response} from "../models/HTTPModels";
 import {Controller} from "./controller";
@@ -14,14 +13,14 @@ export class SubjectController extends Controller {
 
     // body : {
     // "Item": {
-    //      // Lesson here
+    //      // Subject here
     //      }
     //  }
     async create(event: APIGatewayProxyEvent): Response {
         try {
             let item: SubjectObject = JSON.parse(event.body!).Item;
-            const lesson = await new Lesson(item).save()
-            return this.okResponse(lesson)
+            const subject = await new Subject(item).save()
+            return this.okResponse(subject)
         } catch (err) {
             console.log("Error", err)
             return this.errorResponse(err)
@@ -31,7 +30,7 @@ export class SubjectController extends Controller {
 
     async get(event: APIGatewayProxyEvent): Response {
         try {
-            let item: ISubject | null = await Lesson.findById(event.pathParameters!.id)
+            let item: ISubject | null = await Subject.findById(event.pathParameters!.id)
             if (item == null) {
                 return this.notFound()
             }
@@ -45,7 +44,7 @@ export class SubjectController extends Controller {
     async update(event: APIGatewayProxyEvent): Response {
         let updated = JSON.parse(event.body!).Item
         try {
-            const item = await Lesson.findOneAndUpdate(
+            const item = await Subject.findOneAndUpdate(
                 {_id: event.pathParameters!.id},
                 {$set: updated},
                 {new: true}
@@ -64,8 +63,8 @@ export class SubjectController extends Controller {
             let id: string = event.pathParameters!.id
             let item = await Subject.findOneAndDelete({_id: id})
             await Student.updateMany(
-                {lessons: {$elemMatch: {id}}},
-                {$pullAll: {lessons: [id]}})
+                {Subjects: {$elemMatch: {id}}},
+                {$pullAll: {Subjects: [id]}})
             return this.okResponse("")
         } catch (err) {
             console.log("Error", err)
@@ -77,8 +76,8 @@ export class SubjectController extends Controller {
     // Add error handling to inccorrect id
     async getAll(event: APIGatewayProxyEvent): Response {
         try {
-            const lessons = await Lesson.find({})
-            return this.okResponse(lessons)
+            const subjects = await Subject.find({})
+            return this.okResponse(subjects)
         } catch (err) {
             console.log(err)
             return this.errorResponse(err)

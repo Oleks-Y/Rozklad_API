@@ -31,53 +31,53 @@ provider:
   endpointType: regional
 
 functions:
-  add-lesson:
-    handler: app/handler.add_lesson
-    description: POST /lesson
+  add-subject:
+    handler: app/handler.add_subject
+    description: POST /subject
     events :
       - http:
-          path: lesson
+          path: subject
           method: post
           cors:
             origin : '*'
             headers: ${self:custom.allowedHeaders}
 
-  get-lesson:
-    handler: app/handler.get_lesson
-    description: GET /lesson
+  get-subject:
+    handler: app/handler.get_subject
+    description: GET /subject
     events :
       - http:
-          path : lesson/{id}
+          path : subject/{id}
           method: get
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
-  update-lesson:
-    handler: app/handler.update_lesson
-    description: PUT /lesson/{id}
+  update-subject:
+    handler: app/handler.update_subject
+    description: PUT /subject/{id}
     events :
       - http:
-          path: lesson/{id}
+          path: subject/{id}
           method: put
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
-  getAll-lesson:
-    handler: app/handler.getAll
-    description: GET /lesson
+  getAll-subject:
+    handler: app/handler.get_all
+    description: GET /subject
     events:
       - http:
-          path: lesson
+          path: subject
           method: get
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
-  remove-lesson:
-    handler: app/handler.removeLesson
-    description: DELETE /lesson
+  remove-subject:
+    handler: app/handler.remove_subject
+    description: DELETE /subject
     events:
       - http:
-          path : /lesson/{id}
+          path : /subject/{id}
           method : delete
           cors:
             origin: '*'
