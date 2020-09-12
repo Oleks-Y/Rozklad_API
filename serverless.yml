@@ -41,7 +41,7 @@ functions:
           cors:
             origin : '*'
             headers: ${self:custom.allowedHeaders}
-
+  # Subject
   get-subject:
     handler: app/handler.get_subject
     description: GET /subject
@@ -82,6 +82,8 @@ functions:
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
+
+  # Student
   add-student :
     handler: app/handler.create_student
     description:  POST /student
@@ -112,16 +114,16 @@ functions:
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
-  get-student_by_lastname:
-    handler: app/handler.get_student_by_name
-    description: GET /student/by_name/{name}
-    events:
-      - http:
-          path: student/by_name/{name}
-          method: get
-          cors:
-            origin: '*'
-            headers: ${self:custom.allowedHeaders}
+#  get-student_by_lastname:
+#    handler: app/handler.get_student_by_name
+#    description: GET /student/by_name/{name}
+#    events:
+#      - http:
+#          path: student/by_name/{name}
+#          method: get
+#          cors:
+#            origin: '*'
+#            headers: ${self:custom.allowedHeaders}
   update-student:
     handler: app/handler.update_student
     description: PUT /student/{id}
@@ -139,6 +141,57 @@ functions:
       - http:
           path : student/{id}
           method: delete
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  #Lesson
+  add-lesson:
+    handler: app/handler.create_lesson
+    description: POST /lesson
+    events:
+      - http:
+          path: lesson
+          method: post
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  get-lesson:
+    handler: app/handler.get_lesson
+    description: GET /lesson
+    events:
+      - http:
+          path: lesson/{id}
+          method: get
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  update-lesson:
+    handler: app/handler.update_lesson
+    description: PUT /lesson/{id}
+    events:
+      - http:
+          path: lesson/{id}
+          method: put
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  remove-lesson:
+    handler: app/handler.remove_lesson
+    description: DELETE /lesson/{id}
+    events:
+      - http:
+          path: lesson/{id}
+          method: delete
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  getAll-lesson:
+    handler: app/handler.getAll_lesson
+    description: GET /lesson
+    events:
+      - http:
+          path: lesson
+          method: get
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}

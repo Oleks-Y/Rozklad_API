@@ -1,16 +1,3 @@
-// import {ZoomConference} from "./ZoomConference";
-//
-// export class Lesson {
-//     lesson_id : number;
-//     name : string;
-//     teachers : string[];
-//     lessonsZoom: ZoomConference[];
-//     labsZoom : ZoomConference[];
-//     dayOfWeek: number;
-//     numberOfLesson: number;
-//     week: number;
-// }
-
 import {Document, Schema} from "mongoose";
 import * as mongoose from "mongoose";
 
@@ -43,5 +30,5 @@ const SubjectSchema: Schema = new Schema({
     }],
     isRequired : {type: Boolean}
 })
-// Todo іншу колекцію з парами, де буде посилання на дисципліну
+
 export default mongoose.model<ISubject>("Subject", SubjectSchema)

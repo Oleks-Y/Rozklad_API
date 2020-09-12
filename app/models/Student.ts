@@ -23,12 +23,11 @@ export interface Student{
 }
 
 const StudentSchema : Schema = new Schema({
-    // Todo all add all required lessons
     // Todo must be unique
     firstName : {type : String, required : true},
     lastName : {type : String, required : true},
     // Todo Rename to subjects
-    lessons : [{ ref : 'lessons', type : Schema.Types.ObjectId}]
+    subjects : [{ ref : 'subjects', type : Schema.Types.ObjectId}]
 })
 
 export default mongoose.model<IStudent>("Student", StudentSchema)

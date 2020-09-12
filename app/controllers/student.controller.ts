@@ -25,7 +25,7 @@ export class StudentController extends Controller {
     async get(event: APIGatewayProxyEvent): Response {
         try {
             let item: IStudent | null = await Student.findOne({_id: event.pathParameters!.id})
-            await item?.populate([{path: "lessons", model: Subject}]).execPopulate()
+            await item?.populate([{path: "subjects", model: Subject}]).execPopulate()
             if (item == null) {
                 return this.notFound()
             }
@@ -42,10 +42,7 @@ export class StudentController extends Controller {
     async getAll(event: APIGatewayProxyEvent): Response {
         try {
             let item = Student.find()
-            let populatedItem = await item.populate([{path: "lessons", model: Subject}]).exec()
-            if (item == null) {
-                return this.notFound()
-            }
+            let populatedItem = await item.populate([{path: "subjects", model: Subject}]).exec()
             let requiredSubjects = await Subject.find({isRequired: true})
             populatedItem.map((student)=> student.lessons.push(...requiredSubjects ))
             return this.okResponse(item)
@@ -86,25 +83,25 @@ export class StudentController extends Controller {
         }
     }
 
-    // Method for preview
-    // And this shit not working
-    async getByLastName(event: APIGatewayProxyEvent): Response{
-        try{
-            let requestedName = event.pathParameters!.name
-            console.log(requestedName)
-            let item: IStudent[] | null = await Student.find({lastName: requestedName})
-            console.log("Item: ", item)
-            if (item === null) {
-                return this.notFound()
-            }
-            item.map( async item=> await item?.populate([{path: "lessons", model: Subject}]).execPopulate())
-            let requiredLessons = await Subject.find({isRequired: true})
-            item.map( item=>item?.lessons.push(...requiredLessons ) )
-
-            return this.okResponse(item)
-        }catch(err){
-            console.log("Error", err)
-            return this.errorResponse(err)
-        }
-    }
+    // // Method for preview
+    // // And this shit not working
+    // async getByLastName(event: APIGatewayProxyEvent): Response{
+    //     try{
+    //         let requestedName = event.pathParameters!.name
+    //         console.log(requestedName)
+    //         let item: IStudent[] | null = await Student.find({lastName: requestedName})
+    //         console.log("Item: ", item)
+    //         if (item === null) {
+    //             return this.notFound()
+    //         }
+    //         item.map( async item=> await item?.populate([{path: "lessons", model: Subject}]).execPopulate())
+    //         let requiredLessons = await Subject.find({isRequired: true})
+    //         item.map( item=>item?.lessons.push(...requiredLessons ) )
+    //
+    //         return this.okResponse(item)
+    //     }catch(err){
+    //         console.log("Error", err)
+    //         return this.errorResponse(err)
+    //     }
+    // }
 }
