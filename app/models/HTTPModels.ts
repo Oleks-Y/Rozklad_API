@@ -1,4 +1,5 @@
 import {APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda";
+import {ILesson, LessonObject} from "./Lesson";
 
 
 // Default body parameter is object, like dictionary
@@ -6,3 +7,12 @@ import {APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda";
 
 
 export type Response = Promise<APIGatewayProxyResult>;
+
+export interface TimeTable {
+    [Key: string]: Day
+}
+
+interface Day{
+    [Key: string]: ILesson[]
+}
+

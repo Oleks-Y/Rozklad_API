@@ -30,7 +30,7 @@ export class StudentController extends Controller {
                 return this.notFound()
             }
             let requiredLessons = await Subject.find({isRequired: true})
-            item?.lessons.push(...requiredLessons )
+            item?.subjects.push(...requiredLessons )
             return this.okResponse(item)
         }  catch (err){
                 console.log("Error", err)
@@ -44,7 +44,7 @@ export class StudentController extends Controller {
             let item = Student.find()
             let populatedItem = await item.populate([{path: "subjects", model: Subject}]).exec()
             let requiredSubjects = await Subject.find({isRequired: true})
-            populatedItem.map((student)=> student.lessons.push(...requiredSubjects ))
+            populatedItem.map((student)=> student.subjects.push(...requiredSubjects ))
             return this.okResponse(item)
         } catch (err) {
             console.log("Error", err)

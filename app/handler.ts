@@ -4,6 +4,7 @@ import {SubjectController} from "./controllers/subject.controller";
 import {Context} from "aws-lambda";
 import {StudentController} from "./controllers/student.controller";
 import {LessonController} from "./controllers/lesson.controller";
+import {TimetableController} from "./controllers/timetable.controller";
 
 // subjects
 
@@ -39,3 +40,6 @@ export const update_lesson = async (event: any, context: Context) => new LessonC
 export const remove_lesson = async (event: any, context: Context) => new LessonController().remove(event)
 export const getAll_lesson = async (event: any, context: Context) => new LessonController().getAll(event)
 
+// TimeTable
+
+export const get_TimeTable = async (event: any, context: Context) => new TimetableController().getTimetable(event)

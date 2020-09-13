@@ -12,14 +12,15 @@ export interface IStudent extends Document {
 
     firstName : string;
     lastName : string;
-    lessons : [ISubject['_id']];
+    subjects : [ISubject['_id']];
 }
+// Todo додати групу
 
 export interface Student{
 
     firstName : string;
     lastName : string;
-    lessons : [ISubject['_id']];
+    subjects : [ISubject['_id']];
 }
 
 const StudentSchema : Schema = new Schema({

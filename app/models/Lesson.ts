@@ -4,21 +4,24 @@ import * as mongoose from "mongoose";
 import DateTimeFormat = Intl.DateTimeFormat;
 import {Stream} from "stream";
 
+// Todo додати групу
 export interface ILesson extends Document{
     subject: ISubject['_id'];
     // 1 or 2
     week : number;
     dayOfWeek: number;
-    numberOfLesson: number;
+    // numberOfLesson: number;
     timeStart: Date;
+    type: "Лек" | "Лаб";
 }
 
 export interface LessonObject{
     subject: ISubject['_id'];
     week : number;
     dayOfWeek: number;
-    numberOfLesson: number;
+    // numberOfLesson: number;
     timeStart: Date;
+    type: "Лек" | "Лаб";
 }
 
 const LesssonSchema : Schema = new Schema({
