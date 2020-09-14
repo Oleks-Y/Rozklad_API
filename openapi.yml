@@ -1,0 +1,42 @@
+openapi: 3.0.0
+components:
+  schemas:
+    SubjectModel:
+      type: object
+      properties:
+        name:
+          type: string
+        teachers:
+          type: string
+        lessonsZoom:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+              accessCode:
+                type: string
+        labsZoom:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+              accessCode:
+                type: string
+        isRequired:
+          type: boolean
+  securitySchemes: {}
+info:
+  title: rozklad
+  description: Description
+  version: '1'
+paths:
+  /subject:
+    post:
+      operationId: add-subject
+      summary: Create Subject
+      description: Create new Subject object
+      responses: {}

@@ -4,8 +4,45 @@ plugins:
   - serverless-plugin-typescript
   - serverless-dotenv-plugin
   - serverless-offline
+  - serverless-openapi-documentation
 
 custom:
+  documentation:
+    version: '1'
+    title: "rozklad"
+    description: "Description"
+    models:
+      - name: "SubjectModel"
+        description: "This is subject"
+        contentType: "application/json"
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            teachers:
+              type: string
+            lessonsZoom:
+              type: array
+              items:
+                type: object
+                properties:
+                  url:
+                    type: string
+                  accessCode:
+                    type: string
+            labsZoom:
+              type: array
+              items:
+                type: object
+                properties:
+                  url:
+                    type: string
+                  accessCode:
+                    type: string
+            isRequired:
+              type: boolean
+
   serverless-offline:
     useChildProcesses : true
   allowedHeaders:
@@ -31,6 +68,7 @@ provider:
   endpointType: regional
 
 functions:
+  # Subject
   add-subject:
     handler: app/handler.add_subject
     description: POST /subject
@@ -41,7 +79,14 @@ functions:
           cors:
             origin : '*'
             headers: ${self:custom.allowedHeaders}
-  # Subject
+          documentation:
+            summary: "Create Subject"
+            description: "Create new Subject object"
+            requestBody:
+              description: "Subject object, in format {'Item':{//Subject here}}"
+            requestModels:
+              application/json: "SubjectModel"
+
   get-subject:
     handler: app/handler.get_subject
     description: GET /subject
@@ -52,6 +97,9 @@ functions:
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
+
+
+
   update-subject:
     handler: app/handler.update_subject
     description: PUT /subject/{id}

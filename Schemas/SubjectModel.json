@@ -1,0 +1,30 @@
+{
+  "Item": {
+    "name": "Matematica",
+    "teachers": "teacher",
+    "lessonsZoom": [
+      {
+        "url": "aaaa",
+        "accessCode": "1234"
+      }
+    ],
+    "labsZoom": [
+      {
+        "url": "aaaa",
+        "accessCode": "1234"
+      }
+    ],
+    "isRequired": true
+  }
+},
+{
+"type": "object",
+"properties": {
+"Item": {type: "object",
+"properties": {
+        "name": {"type": "string"},
+        "teachers": {"type": "string"},
+        "lessonsZoom": {}
+}}
+}
+}
