@@ -162,6 +162,16 @@ functions:
           cors:
             origin: '*'
             headers: ${self:custom.allowedHeaders}
+  get-student-by-name:
+    handler: app/handler.get_student_by_name
+    description: POST /student/name
+    events:
+      - http:
+          path: student/name
+          method: post
+          cors:
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
 #  get-student_by_lastname:
 #    handler: app/handler.get_student_by_name
 #    description: GET /student/by_name/{name}

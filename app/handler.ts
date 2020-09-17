@@ -30,6 +30,8 @@ export const update_student = async (event: any, context: Context) => new Studen
 
 export const remove_student = async (event: any, context: Context) => new StudentController().remove(event)
 
+export const get_student_by_name = async (event: any, context: Context) => new StudentController().getByName(event);
+
 // export const get_student_by_name = async (event: any, context: Context) => new StudentController().getByLastName(event)
 
 // Lessons
