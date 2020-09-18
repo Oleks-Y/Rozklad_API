@@ -13,7 +13,9 @@ import { tap } from 'rxjs/operators';
 export class StudentService {
   private student_id = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.student_id = localStorage.getItem('student-id');
+  }
 
   // return id of the student
   getStudentId(studentCreds: {
@@ -24,11 +26,16 @@ export class StudentService {
       Item: { last_name: studentCreds.name, group: studentCreds.group },
     };
     return this.http.post<Student>(api_route + '/student/name', body).pipe(
-      tap((student) => {
-        // @ts-ignore
-        localStorage.setItem('student-id', student._id);
-        this.set_student_id(student._id!);
-      })
+      tap(
+        (student) => {
+          // @ts-ignore
+          localStorage.setItem('student-id', student._id);
+          this.set_student_id(student._id!);
+        },
+        (e) => {
+          e.message = 'Студент не найден';
+        }
+      )
     );
   }
 
