@@ -1,0 +1,56 @@
+<ng-template *ngIf="loader">
+  <app-loader></app-loader>
+</ng-template>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
+  <div class="card-content">
+    <span>Введіть своє прізвище і групу</span>
+    <div class="input-field">
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        [ngClass]="{
+          invalid: form.get('name').touched && form.get('group').invalid
+        }"
+      />
+      <label>Прізвище : </label>
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('name').touched && form.get('group').invalid"
+      >
+        <span *ngIf="form.get('name').errors?.required"
+          >Имя не может быть пустым</span
+        >
+      </span>
+    </div>
+    <div class="input-field">
+      <input
+        id="group"
+        type="text"
+        formControlName="group"
+        [ngClass]="{
+          invalid: form.get('name').touched && form.get('group').invalid
+        }"
+      />
+      <label>Група : </label>
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('name').touched && form.get('group').invalid"
+      >
+        <span *ngIf="form.get('group').errors['required']"
+          >Група не может быть пустой</span
+        >
+        <span *ngIf="form.get('group').errors['pattern']">Неверная группа</span>
+      </span>
+    </div>
+  </div>
+  <div class="card-action">
+    <button
+      type="submit"
+      class="modal-action btn waves-effect"
+      [disabled]="form.invalid || form.disabled"
+    >
+      Войти
+    </button>
+  </div>
+</form>

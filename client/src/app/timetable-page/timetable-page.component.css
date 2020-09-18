@@ -1,0 +1,18 @@
+.container {
+  width: 100%;
+  max-width:initial;
+}
+.container > .row {
+  margin: 0;
+}
+.container > .row > .col {
+  padding: 0;
+}
+
+.text-size{
+  font-size: 15px !important;
+}
+
+/*.card{*/
+/*  height: 100px;*/
+/*}*/
