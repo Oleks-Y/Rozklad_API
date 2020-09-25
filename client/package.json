@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~10.0.6",
     "@angular/platform-browser-dynamic": "~10.0.6",
     "@angular/router": "~10.0.6",
+    "@fortawesome/fontawesome-free": "^5.14.0",
+    "font-awesome": "^4.7.0",
     "materialize-css": "^1.0.0-rc.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

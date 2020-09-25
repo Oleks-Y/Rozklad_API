@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="page-title">
+    <h4>{{subject ? subject.name : ""}}
+    </h4>
+    <span>
+  </span>
+  </div>
+
+  <div class="row">
+    <form class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="input-field">
+        <input
+          formControlName="lessonsZoom"
+          id="lessonsZoom"
+          type="text"
+          [ngClass]="{'invalid': form.get('lessonsZoom').invalid && form.get('lessonsZoom').touched}"
+
+        />
+        <label for="lessonsZoom">Лекції</label>
+              <span
+                class="helper-text red-text"
+                *ngIf="form.get('lessonsZoom').invalid && form.get('lessonsZoom').touched"
+              >
+                <span *ngIf="form.get('lessonsZoom').errors['pattern']">
+                  Неккоректная ссылка
+                </span>
+              </span>
+      </div>
+      <div class="input-field">
+        <input
+          formControlName="lesson_accessCode"
+          id="lesson_accessCode"
+          type="text"
+
+        />
+        <label for="lesson_accessCode">Код доступу</label>
+      </div>
+      <div class="input-field">
+        <input
+          formControlName="labsZoom"
+          id="labsZoom"
+          type="text"
+          [ngClass]="{'invalid': form.get('labsZoom').invalid && form.get('labsZoom').touched}"
+
+        />
+        <label for="labsZoom">Лаби</label>
+        <span
+          class="helper-text red-text"
+          *ngIf="form.get('labsZoom').invalid && form.get('labsZoom').touched"
+        >
+                <span *ngIf="form.get('labsZoom').errors['pattern']">
+                  Неккоректная ссылка
+                </span>
+              </span>
+      </div>
+      <div class="input-field">
+        <input
+          formControlName="labs_accessCode"
+          id="labs_accessCode"
+          type="text"
+        />
+        <label for="labs_accessCode">Код доступу</label>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          [disabled]="form.invalid || form.disabled"
+          class="waves-effect waves-light btn"
+        >Сохранить изменения
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>

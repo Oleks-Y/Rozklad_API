@@ -13,6 +13,8 @@ import { AuthGuard } from './shared/classes/auth.guard';
 import { StudentService } from './shared/services/student.service';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { TimetablePageComponent } from './timetable-page/timetable-page.component';
+import { SubjectPageComponent } from './subject-page/subject-page.component';
+import { SubjectService } from './shared/services/subject.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { TimetablePageComponent } from './timetable-page/timetable-page.componen
     LoginPageComponent,
     LoaderComponent,
     TimetablePageComponent,
+    SubjectPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { TimetablePageComponent } from './timetable-page/timetable-page.componen
   providers: [
     StudentService,
     AuthGuard,
+    SubjectService,
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   multi: true,

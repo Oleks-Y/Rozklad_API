@@ -18,10 +18,8 @@ export class StudentService {
   }
 
   // return id of the student
-  getStudentId(studentCreds: {
-    name: string;
-    group: string;
-  }): Observable<Student> {
+  //Todo choose another name
+  get(studentCreds: { name: string; group: string }): Observable<Student> {
     let body: any = {
       Item: { last_name: studentCreds.name, group: studentCreds.group },
     };

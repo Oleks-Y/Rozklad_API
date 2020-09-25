@@ -4,8 +4,13 @@
       <h4>Перший тиждень</h4>
     </div>
   </div>
-  <table>
-    <tbody>
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+  <div class="container" *ngIf="dataFormatted else loader" >
+    <div  *ngFor="let week of dataFormatted">
+    <table>
+      <tbody>
       <tr>
         <td></td>
         <td>Понеділок</td>
@@ -15,129 +20,42 @@
         <td>П'ятниця</td>
         <td>Суббота</td>
       </tr>
-      <tr>
-        <td>1. 8.30</td>
-        <td>
-          <div class="card">
+      <tr *ngFor="let day of week">
+        <td></td>
+        <td *ngFor="let lesson of day">
+          <div class="card" *ngIf="lesson else empty">
             <div class="waves-effect waves-block waves-light">
               <div class="activator">
-                <p class="card-title activator text-size">Math </p>
+                <p class="card-title activator text-size">{{lesson.subject.name}}</p>
               </div>
             </div>
             <div class="card-content">
-              <span class=" activator grey-text text-darken-6 text-size"
-                >Tony cashvab</span
-              >
+                        <span class=" activator grey-text text-darken-6 text-size"
+                        >{{lesson.subject.teachers}} | {{lesson.type}}</span>
+
             </div>
             <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4 text-size"
-                >Links<i class="material-icons right">x</i></span
-              >
-              <a href="http://google.com">Link</a>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="card">
-            <div class="waves-effect waves-block waves-light">
-              <div class="activator">
-                <span class="card-title activator grey-text">Tone cash</span>
+                        <span class="card-title grey-text text-darken-4 text-size"
+                        >Links &shy; <a [routerLink]="['/subject', lesson.subject._id]" ><i class="fa fa-pencil fa-2x"></i></a> <i class="material-icons right">x</i>
+                        </span>
+
+              <div *ngIf="lesson.type==='Лек' else lab">
+                <a *ngFor="let link of lesson.subject.lessonsZoom" href="{{link.url}}"> {{link.url}}</a>
               </div>
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-6"
-                >Tone cash<i class="material-icons right">more_vert</i></span
-              >
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4"
-                >Card Title<i class="material-icons right">close</i></span
-              >
-              <p>Here is some more information .</p>
+              <ng-template #lab>
+                <div>
+                  <a *ngFor="let link of lesson.subject.labsZoom" href="{{link.url}}"> {{link.url}}</a>
+                </div>
+              </ng-template>
             </div>
           </div>
-        </td>
-        <td>
-          <div class="card">
-            <div class="waves-effect waves-block waves-light">
-              <div class="activator">
-                <span class="card-title activator grey-text">Tone cash</span>
-              </div>
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-6"
-                >Tone cash<i class="material-icons right">more_vert</i></span
-              >
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4"
-                >Card Title<i class="material-icons right">close</i></span
-              >
-              <p>Here is some more information .</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="card">
-            <div class="waves-effect waves-block waves-light">
-              <div class="activator">
-                <span class="card-title activator grey-text">Tone cash</span>
-              </div>
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-6"
-                >Tone cash<i class="material-icons right">more_vert</i></span
-              >
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4"
-                >Card Title<i class="material-icons right">close</i></span
-              >
-              <p>Here is some more information .</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="card">
-            <div class="waves-effect waves-block waves-light">
-              <div class="activator">
-                <span class="card-title activator grey-text">Tone cash</span>
-              </div>
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-6"
-                >Tone cash<i class="material-icons right">more_vert</i></span
-              >
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4"
-                >Card Title<i class="material-icons right">close</i></span
-              >
-              <p>Here is some more information .</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="card">
-            <div class="waves-effect waves-block waves-light">
-              <div class="activator">
-                <span class="card-title activator grey-text">Tone cash</span>
-              </div>
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-6"
-                >Tone cash<i class="material-icons right">more_vert</i></span
-              >
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4"
-                >Card Title<i class="material-icons right">close</i></span
-              >
-              <p>Here is some more information .</p>
-            </div>
-          </div>
+          <ng-template #empty></ng-template>
         </td>
       </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+
 </div>

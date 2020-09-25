@@ -5,6 +5,7 @@ import { SiteLayoutComponent } from './shared/layout/site-layout/site-layout.com
 import { LoginPageComponent } from './login-page/login-page.component';
 import { TimetablePageComponent } from './timetable-page/timetable-page.component';
 import { AuthGuard } from './shared/classes/auth.guard';
+import { SubjectPageComponent } from './subject-page/subject-page.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,10 @@ const routes: Routes = [
     path: '',
     component: SiteLayoutComponent,
     canActivate: [AuthGuard],
-    children: [{ path: 'timetable', component: TimetablePageComponent }],
+    children: [
+      { path: 'timetable', component: TimetablePageComponent },
+      { path: 'subject/:id', component: SubjectPageComponent },
+    ],
   },
 ];
 

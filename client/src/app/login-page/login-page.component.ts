@@ -46,7 +46,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     // Todo on mobile error message too low
     //Todo Add loader
     this.form.disable();
-    this.aSub = this.studentService.getStudentId(this.form.value).subscribe(
+    this.aSub = this.studentService.get(this.form.value).subscribe(
       () => this.router.navigate(['/timetable']),
       (error) => {
         MaterialService.toast(error.message);
