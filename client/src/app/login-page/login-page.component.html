@@ -23,26 +23,26 @@
         >
       </span>
     </div>
-    <div class="input-field">
-      <input
-        id="group"
-        type="text"
-        formControlName="group"
-        [ngClass]="{
-          invalid: form.get('name').touched && form.get('group').invalid
-        }"
-      />
-      <label>Група : </label>
-      <span
-        class="helper-text red-text"
-        *ngIf="form.get('name').touched && form.get('group').invalid"
-      >
-        <span *ngIf="form.get('group').errors['required']"
-          >Група не может быть пустой</span
-        >
-        <span *ngIf="form.get('group').errors['pattern']">Неверная группа</span>
-      </span>
-    </div>
+<!--    <div class="input-field">-->
+<!--      <input-->
+<!--        id="group"-->
+<!--        type="text"-->
+<!--        formControlName="group"-->
+<!--        [ngClass]="{-->
+<!--          invalid: form.get('name').touched && form.get('group').invalid-->
+<!--        }"-->
+<!--      />-->
+<!--      <label>Група : </label>-->
+<!--      <span-->
+<!--        class="helper-text red-text"-->
+<!--        *ngIf="form.get('name').touched && form.get('group').invalid"-->
+<!--      >-->
+<!--        <span *ngIf="form.get('group').errors['required']"-->
+<!--          >Група не может быть пустой</span-->
+<!--        >-->
+<!--        <span *ngIf="form.get('group').errors['pattern']">Неверная группа</span>-->
+<!--      </span>-->
+<!--    </div>-->
   </div>
   <div class="card-action">
     <button

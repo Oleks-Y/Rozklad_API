@@ -14,7 +14,7 @@ export class TimetableService {
 
   get(id: string): Observable<TimeTable> {
     // student._id != null
-    let headers = new HttpHeaders({ studentId: id });
+    let headers = new HttpHeaders({ student_id: id });
     return this.http.get<TimeTable>(api_route + '/timetable', {
       headers: headers,
     });

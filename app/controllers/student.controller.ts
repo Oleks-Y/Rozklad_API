@@ -34,6 +34,7 @@ export class StudentController extends Controller {
       }
       let requiredLessons = await Subject.find({ isRequired: true });
       item?.subjects.push(...requiredLessons);
+
       return this.okResponse(item);
     } catch (err) {
       console.log("Error", err);
@@ -51,7 +52,8 @@ export class StudentController extends Controller {
       populatedItem.map((student) =>
         student.subjects.push(...requiredSubjects)
       );
-      return this.okResponse(item);
+      console.log(item);
+      return this.okResponse(populatedItem);
     } catch (err) {
       console.log("Error", err);
       return this.errorResponse(err);
@@ -82,6 +84,9 @@ export class StudentController extends Controller {
   async update(event: APIGatewayProxyEvent): Response {
     try {
       let updated = JSON.parse(event.body!).Item;
+      if (updated == null) {
+        return this.notFound();
+      }
       let item: IStudent | null = await Student.findOneAndUpdate(
         { _id: event.pathParameters!.id },
         { $set: updated },
@@ -90,7 +95,7 @@ export class StudentController extends Controller {
       if (item == null) {
         return this.notFound();
       }
-      return this.okResponse(updated);
+      return this.okResponse(item);
     } catch (err) {
       console.log("Error", err);
       return this.errorResponse(err);

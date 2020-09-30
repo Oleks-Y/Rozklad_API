@@ -14,6 +14,7 @@ import { MaterialService } from '../shared/classes/material.service';
 export class SubjectPageComponent implements OnInit {
   form: FormGroup;
   subject: Subject;
+  loaded = false;
 
   constructor(
     private subjectService: SubjectService,
@@ -32,6 +33,7 @@ export class SubjectPageComponent implements OnInit {
     this.activatedRoute.params
       .pipe(
         switchMap((params: Params) => {
+          this.loaded = true;
           return this.subjectService.get(params['id']);
         })
       )
@@ -46,6 +48,7 @@ export class SubjectPageComponent implements OnInit {
             labsZoom: subject.labsZoom[0]?.url,
             labs_accessCode: subject.labsZoom[0]?.accessCode,
           });
+
           MaterialService.updateTextInputs();
         }
       }),

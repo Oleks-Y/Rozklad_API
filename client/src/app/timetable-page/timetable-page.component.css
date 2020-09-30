@@ -12,7 +12,22 @@
 .text-size{
   font-size: 15px !important;
 }
+/*@media all and (max-width:500px){*/
+/*  table{*/
+/*    display: block;*/
+/*    width:100%;*/
+/*  }*/
 
+/*  td{*/
+/*    display:block;*/
+/*    width:100%;*/
+/*  }*/
+
+/*  tr{*/
+/*    display:block;*/
+/*    margin-bottom:30px;*/
+/*  }*/
+/*}*/
 /*.card{*/
 /*  height: 100px;*/
 /*}*/

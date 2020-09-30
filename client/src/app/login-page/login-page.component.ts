@@ -29,10 +29,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required]),
-      group: new FormControl(null, [
-        Validators.required,
-        Validators.pattern('^[A-Z]{2}-[0-9]{2}$'),
-      ]),
+      // group: new FormControl(null, [
+      //   Validators.required,
+      //   Validators.pattern('^[A-Z]{2}-[0-9]{2}$'),
+      // ]),
     });
   }
 
