@@ -1,0 +1,52 @@
+<div class="container"> <!--todo try do table with cols and rows-->
+  <div *ngFor="let week of timeTableArray; let i = index" class="Rtable Rtable--2cols Rtable--collapse">
+    <ng-template #firstWeek>
+      <h4>Перший тиждень</h4>
+    </ng-template>
+    <ng-template #secondWeek>
+      <h4>Другий тиждень</h4>
+    </ng-template>
+    <div *ngIf="i==0 then firstWeek else secondWeek" ></div>
+
+    <div *ngFor="let day of week; let j = index" [ngClass]="{'blue lighten-3': currentDay===(j+1) && i===currentWeek}" >
+      <div [ngSwitch]="j"  style="order:0;" class="Rtable-cell Rtable-cell--head">
+        <p *ngSwitchCase="0">Понеділок</p>
+        <p *ngSwitchCase="1">Вівторок</p>
+        <p *ngSwitchCase="2">Середа</p>
+        <p *ngSwitchCase="3">Четвер</p>
+        <p *ngSwitchCase="4">П'ятниця</p>
+        <p *ngSwitchCase="5">Субота</p>
+        <p *ngSwitchDefault>Shit</p>
+      </div>
+      <div *ngFor="let lesson of day; let k= index" [ngStyle]="{'order':k}"  class="Rtable-cell" >
+        <ng-template #empty></ng-template>
+        <div class="card" *ngIf="lesson else empty" [ngClass]="{'blue lighten-5': currentDay===(j+1) && i===currentWeek}">
+          <div class="waves-effect waves-block waves-light">
+            <div class="activator">
+              <p class="card-title activator text-size">{{lesson.subject.name}}</p>
+            </div>
+          </div>
+          <div class="card-content">
+                        <span class=" activator grey-text text-darken-6 text-size"
+                        >{{lesson.subject.teachers}} | {{lesson.type}}</span>
+
+          </div>
+          <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4 text-size"
+                        >Links &shy; <a [routerLink]="['/subject', lesson.subject._id]" ><i class="fa fa-pencil fa-2x"></i></a> <i class="material-icons right">x</i>
+                        </span>
+
+            <div *ngIf="lesson.type==='Лек' else lab">
+              <a *ngFor="let link of lesson.subject.lessonsZoom" href="{{link.url}}"> {{link.url}}</a>
+            </div>
+            <ng-template #lab>
+              <div>
+                <a *ngFor="let link of lesson.subject.labsZoom" href="{{link.url}}"> {{link.url}}</a>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

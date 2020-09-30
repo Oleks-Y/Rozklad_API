@@ -15,6 +15,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { TimetablePageComponent } from './timetable-page/timetable-page.component';
 import { SubjectPageComponent } from './subject-page/subject-page.component';
 import { SubjectService } from './shared/services/subject.service';
+import { TimetablePageResponsiveComponent } from './timetable-page-responsive/timetable-page-responsive.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SubjectService } from './shared/services/subject.service';
     LoaderComponent,
     TimetablePageComponent,
     SubjectPageComponent,
+    TimetablePageResponsiveComponent,
   ],
   imports: [
     BrowserModule,
