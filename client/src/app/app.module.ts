@@ -16,7 +16,7 @@ import { TimetablePageComponent } from './timetable-page/timetable-page.componen
 import { SubjectPageComponent } from './subject-page/subject-page.component';
 import { SubjectService } from './shared/services/subject.service';
 import { TimetablePageResponsiveComponent } from './timetable-page-responsive/timetable-page-responsive.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +33,7 @@ import { TimetablePageResponsiveComponent } from './timetable-page-responsive/ti
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
   ],
   providers: [
     StudentService,

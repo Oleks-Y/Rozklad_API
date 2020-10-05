@@ -4,19 +4,37 @@
   .Rtable--collapse {
     display: block;
   }
+
   .Rtable--collapse > .Rtable-cell {
     width: 100% !important;
   }
+
   .Rtable--collapse > .Rtable-cell--foot {
     margin-bottom: 1em;
   }
 }
+
 .no-flexbox .Rtable {
   display: block;
 }
+
 .no-flexbox .Rtable > .Rtable-cell {
   width: 100%;
 }
+
 .no-flexbox .Rtable > .Rtable-cell--foot {
   margin-bottom: 1em;
 }
+
+.container {
+  width: 97%;
+  max-width: initial;
+}
+.container > .row {
+  margin: 5px;
+}
+.container > .row > .col {
+  padding: 5px;
+  height: 100%;
+}
+

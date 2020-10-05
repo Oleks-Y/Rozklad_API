@@ -10,13 +10,13 @@
         type="text"
         formControlName="name"
         [ngClass]="{
-          invalid: form.get('name').touched && form.get('group').invalid
+          invalid: form.get('name').touched && form.get('name').invalid
         }"
       />
       <label>Прізвище : </label>
       <span
         class="helper-text red-text"
-        *ngIf="form.get('name').touched && form.get('group').invalid"
+        *ngIf="form.get('name').touched && form.get('name').invalid"
       >
         <span *ngIf="form.get('name').errors?.required"
           >Имя не может быть пустым</span

@@ -1,5 +1,6 @@
+
 <div class="container"> <!--todo try do table with cols and rows-->
-  <div *ngFor="let week of timeTableArray; let i = index" class="Rtable Rtable--2cols Rtable--collapse">
+  <div *ngFor="let week of timeTableArray; let i = index" class="row">
     <ng-template #firstWeek>
       <h4>Перший тиждень</h4>
     </ng-template>
@@ -8,19 +9,22 @@
     </ng-template>
     <div *ngIf="i==0 then firstWeek else secondWeek" ></div>
 
-    <div *ngFor="let day of week; let j = index" [ngClass]="{'blue lighten-3': currentDay===(j+1) && i===currentWeek}" >
-      <div [ngSwitch]="j"  style="order:0;" class="Rtable-cell Rtable-cell--head">
-        <p *ngSwitchCase="0">Понеділок</p>
-        <p *ngSwitchCase="1">Вівторок</p>
-        <p *ngSwitchCase="2">Середа</p>
-        <p *ngSwitchCase="3">Четвер</p>
-        <p *ngSwitchCase="4">П'ятниця</p>
-        <p *ngSwitchCase="5">Субота</p>
-        <p *ngSwitchDefault>Shit</p>
+    <div *ngFor="let day of week; let j = index" class = "col s12 m2" [ngClass]="{'blue lighten-3': currentDay===(j+1) && i===currentWeek}" >
+      <div id="day{{j}}" [ngSwitch]="j"  style="order:0;" class="Rtable-cell Rtable-cell--head">
+        <h3 *ngSwitchCase="0">Понеділок</h3>
+        <h3 *ngSwitchCase="1">Вівторок</h3>
+        <h3 *ngSwitchCase="2">Середа</h3>
+        <h3 *ngSwitchCase="3">Четвер</h3>
+        <h3 *ngSwitchCase="4">П'ятниця</h3>
+        <h3 *ngSwitchCase="5">Субота</h3>
+        <h3 *ngSwitchDefault>Shit</h3>
       </div>
+      <div class="divider"></div>
       <div *ngFor="let lesson of day; let k= index" [ngStyle]="{'order':k}"  class="Rtable-cell" >
-        <ng-template #empty></ng-template>
-        <div class="card" *ngIf="lesson else empty" [ngClass]="{'blue lighten-5': currentDay===(j+1) && i===currentWeek}">
+        <ng-template #empty>
+          <div class="placeholder" style="height: 225px"></div>
+        </ng-template>
+        <div class="card" *ngIf="lesson else empty" [ngClass]="{'blue lighten-5': currentDay===(j+1) && i===currentWeek}" style="height: 200px">
           <div class="waves-effect waves-block waves-light">
             <div class="activator">
               <p class="card-title activator text-size">{{lesson.subject.name}}</p>
@@ -33,7 +37,7 @@
           </div>
           <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4 text-size"
-                        >Links &shy; <a [routerLink]="['/subject', lesson.subject._id]" ><i class="fa fa-pencil fa-2x"></i></a> <i class="material-icons right">x</i>
+                        >Links &shy; <a [routerLink]="['/subject', lesson.subject._id]" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil fa-2x "></i></a> <i class="material-icons right">x</i>
                         </span>
 
             <div *ngIf="lesson.type==='Лек' else lab">
@@ -46,7 +50,8 @@
             </ng-template>
           </div>
         </div>
+        <div class="divider"></div>
       </div>
     </div>
   </div>
-</div>
+
