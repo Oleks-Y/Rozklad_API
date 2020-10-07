@@ -3,7 +3,7 @@
 </ng-template>
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
   <div class="card-content">
-    <span>Введіть своє прізвище і групу</span>
+    <span>Введіть своє прізвище</span>
     <div class="input-field">
       <input
         id="name"
@@ -50,7 +50,7 @@
       class="modal-action btn waves-effect"
       [disabled]="form.invalid || form.disabled"
     >
-      Войти
+      Ввійти
     </button>
   </div>
 </form>

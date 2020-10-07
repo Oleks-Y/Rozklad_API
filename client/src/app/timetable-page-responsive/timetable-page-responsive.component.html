@@ -9,8 +9,8 @@
     </ng-template>
     <div *ngIf="i==0 then firstWeek else secondWeek" ></div>
 
-    <div *ngFor="let day of week; let j = index" class = "col s12 m2" [ngClass]="{'blue lighten-3': currentDay===(j+1) && i===currentWeek}" >
-      <div id="day{{j}}" [ngSwitch]="j"  style="order:0;" class="Rtable-cell Rtable-cell--head">
+    <div   *ngFor="let day of week; let j = index" class = "col s12 m2" [ngClass]="{'blue lighten-3': currentDay===(j+1) && i===currentWeek}" >
+      <div  id="day{{j}}week{{i}}" [ngSwitch]="j"  style="order:0;" class="Rtable-cell Rtable-cell--head">
         <h3 *ngSwitchCase="0">Понеділок</h3>
         <h3 *ngSwitchCase="1">Вівторок</h3>
         <h3 *ngSwitchCase="2">Середа</h3>
@@ -22,12 +22,12 @@
       <div class="divider"></div>
       <div *ngFor="let lesson of day; let k= index" [ngStyle]="{'order':k}"  class="Rtable-cell" >
         <ng-template #empty>
-          <div class="placeholder" style="height: 225px"></div>
+          <div class="placeholder empty"></div>
         </ng-template>
         <div class="card" *ngIf="lesson else empty" [ngClass]="{'blue lighten-5': currentDay===(j+1) && i===currentWeek}" style="height: 200px">
           <div class="waves-effect waves-block waves-light">
             <div class="activator">
-              <p class="card-title activator text-size">{{lesson.subject.name}}</p>
+              <p class="card-title activator text-size"><span class="turn-off">{{k+1}}.&nbsp;</span>{{lesson.subject.name}}</p>
             </div>
           </div>
           <div class="card-content">
@@ -37,7 +37,7 @@
           </div>
           <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4 text-size"
-                        >Links &shy; <a [routerLink]="['/subject', lesson.subject._id]" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil fa-2x "></i></a> <i class="material-icons right">x</i>
+                        >Links &shy; <a [routerLink]="['/subject', lesson.subject._id]" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil fa-1x "></i></a> <i class="material-icons right">x</i>
                         </span>
 
             <div *ngIf="lesson.type==='Лек' else lab">

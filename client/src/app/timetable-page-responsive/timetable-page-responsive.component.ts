@@ -51,7 +51,9 @@ export class TimetablePageResponsiveComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       console.log(`day${this.currentDay - 1}`);
       setTimeout(() => {
-        let element = document.getElementById(`day${this.currentDay - 1}`);
+        let element = document.getElementById(
+          `day${this.currentDay - 1}week${this.currentWeek}`
+        );
         //1000 is the scroll time it self, 1s:
         window.scroll(0, element.offsetTop);
       }, 1000);

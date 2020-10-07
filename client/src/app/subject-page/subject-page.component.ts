@@ -33,7 +33,6 @@ export class SubjectPageComponent implements OnInit {
     this.activatedRoute.params
       .pipe(
         switchMap((params: Params) => {
-          this.loaded = true;
           return this.subjectService.get(params['id']);
         })
       )
@@ -50,6 +49,7 @@ export class SubjectPageComponent implements OnInit {
           });
 
           MaterialService.updateTextInputs();
+          this.loaded = true;
         }
       }),
       (error) => MaterialService.toast(error.message);

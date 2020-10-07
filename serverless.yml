@@ -5,8 +5,40 @@ plugins:
   - serverless-dotenv-plugin
   - serverless-offline
   - serverless-openapi-documentation
-
+  - serverless-plugin-warmup
+iamRoleStatements:
+  - Effect: 'Allow'
+    Action:
+      - 'lambda:InvokeFunction'
+    Resource: "*"
 custom:
+  warmup:
+    enabled: true # Whether to warm up functions by default or not
+    folderName: '_warmup' # Name of the folder created for the generated warmup
+    cleanFolder: false
+    memorySize: 256
+    name: 'make-them-pop'
+#      role: myCustRole0
+    vpc: false
+    events:
+      - schedule: 'cron(0/30 8-23 ? * MON-FRI *)' # Run WarmUp every 5 minutes Mon-Fri between 8:00am and 5:55pm (UTC)
+    package:
+      individually: true
+#        exclude: # exclude additional binaries that are included at the serverless package level
+#          - ../**
+#          - ../../**
+#        include:
+#          - ./**
+    timeout: 20
+    prewarm: true # Run WarmUp immediately after a deploymentlambda
+    clientContext:
+      source: my-custom-source
+      other: '20'
+    payload:
+      source: my-custom-source
+      other: 20
+    payloadRaw: true # Won't JSON.stringify() the payload, may be necessary for Go/AppSync deployments
+    concurrency: 5 # Warm up 5 concurrent instances
   documentation:
     version: '1'
     title: "rozklad"
@@ -70,6 +102,7 @@ provider:
 functions:
   # Subject
   add-subject:
+    warmup: true
     handler: app/handler.add_subject
     description: POST /subject
     events :
@@ -88,6 +121,7 @@ functions:
               application/json: "SubjectModel"
 
   get-subject:
+    warmup: true
     handler: app/handler.get_subject
     description: GET /subject
     events :
@@ -101,6 +135,7 @@ functions:
 
 
   update-subject:
+    warmup: true
     handler: app/handler.update_subject
     description: PUT /subject/{id}
     events :
@@ -255,6 +290,7 @@ functions:
             headers: ${self:custom.allowedHeaders}
   #TimeTable
   get-Timetable:
+    warmup: true
     handler: app/handler.get_TimeTable
     description: GET /timetable
     events :

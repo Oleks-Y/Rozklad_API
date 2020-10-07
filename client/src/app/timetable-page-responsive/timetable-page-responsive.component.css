@@ -38,3 +38,18 @@
   height: 100%;
 }
 
+.empty{
+  height: 225px;
+}
+.turn-off{
+  display: none;
+}
+@media only screen and (max-width: 600px) {
+  .empty{
+    height: 50px;
+  }
+
+  .turn-off{
+    display: inline;
+  }
+}
